@@ -20,6 +20,26 @@ def get_key(val, my_dict):
 
     return "key doesn't exist"
 
+def print_months():
+    print('January: 1')
+    print('February: 2')
+    print('March: 3')
+    print('April: 4')
+    print('May: 5')
+    print('June: 6')
+    print('all: 7')
+
+def print_days():
+    print('monday: 0')
+    print('tuesday: 1')
+    print('wednesday: 2')
+    print('thursday: 3')
+    print('friday: 4')
+    print('saturday: 5')
+    print('sunday: 6')
+    print('all: 7')
+
+
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
@@ -52,51 +72,25 @@ def get_filters():
         city = get_key(city, cities)
         # get the month
         print("please enter the number corresponding to the month that you would like to use as a filter : ")
-        print('January: 1')
-        print('February: 2')
-        print('March: 3')
-        print('April: 4')
-        print('May: 5')
-        print('June: 6')
-        print('all: 7')
+        print_months()
 
         month = int(input())
         while month not in months.values():
             print("Invalid input!! \n")
             print("please enter the number corresponding to the month that you would like to use as a filter : ")
-            print('January: 1')
-            print('February: 2')
-            print('March: 3')
-            print('April: 4')
-            print('May: 5')
-            print('June: 6')
-            print('all: 7')
+            print_months()
             month = int(input())
 
         month = get_key(month, months)
         # get the day of the week
         print("please enter the number corresponding to the day that you would like to use as a filter : ")
-        print('monday: 0')
-        print('tuesday: 1')
-        print('wednesday: 2')
-        print('thursday: 3')
-        print('friday: 4')
-        print('saturday: 5')
-        print('sunday: 6')
-        print('all: 7')
+        print_days()
         day = int(input())
 
         while day not in days.values():
             print("Invalid input!! \n")
             print("please enter the number corresponding to the day that you would like to use as a filter : ")
-            print('monday: 0')
-            print('tuesday: 1')
-            print('wednesday: 2')
-            print('thursday: 3')
-            print('friday: 4')
-            print('saturday: 5')
-            print('sunday: 6')
-            print('all: 7')
+            print_days()
             day = int(input())
 
         day = get_key(day, days)
