@@ -15,4 +15,4 @@ projectbikeshare.py
 
 
 ### Credits
-Chahinez Baouche
+Chahinez Baouche, nickname Chanez
