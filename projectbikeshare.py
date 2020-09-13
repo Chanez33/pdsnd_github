@@ -20,6 +20,26 @@ def get_key(val, my_dict):
 
     return "key doesn't exist"
 
+def print_months():
+    print('January: 1')
+    print('February: 2')
+    print('March: 3')
+    print('April: 4')
+    print('May: 5')
+    print('June: 6')
+    print('all: 7')
+
+def print_days():
+    print('monday: 0')
+    print('tuesday: 1')
+    print('wednesday: 2')
+    print('thursday: 3')
+    print('friday: 4')
+    print('saturday: 5')
+    print('sunday: 6')
+    print('all: 7')
+
+
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
@@ -41,7 +61,6 @@ def get_filters():
     try :
         city = int(input())
 
-
         while city not in cities.values():
             print("Invalid input!! \n")
             print("please enter the number corresponding to the city that you would like to analyze the data for : ")
@@ -53,51 +72,25 @@ def get_filters():
         city = get_key(city, cities)
         # get the month
         print("please enter the number corresponding to the month that you would like to use as a filter : ")
-        print('January: 1')
-        print('February: 2')
-        print('March: 3')
-        print('April: 4')
-        print('May: 5')
-        print('June: 6')
-        print('all: 7')
+        print_months()
 
         month = int(input())
         while month not in months.values():
             print("Invalid input!! \n")
             print("please enter the number corresponding to the month that you would like to use as a filter : ")
-            print('January: 1')
-            print('February: 2')
-            print('March: 3')
-            print('April: 4')
-            print('May: 5')
-            print('June: 6')
-            print('all: 7')
+            print_months()
             month = int(input())
 
         month = get_key(month, months)
         # get the day of the week
         print("please enter the number corresponding to the day that you would like to use as a filter : ")
-        print('monday: 0')
-        print('tuesday: 1')
-        print('wednesday: 2')
-        print('thursday: 3')
-        print('friday: 4')
-        print('saturday: 5')
-        print('sunday: 6')
-        print('all: 7')
+        print_days()
         day = int(input())
 
         while day not in days.values():
             print("Invalid input!! \n")
             print("please enter the number corresponding to the day that you would like to use as a filter : ")
-            print('monday: 0')
-            print('tuesday: 1')
-            print('wednesday: 2')
-            print('thursday: 3')
-            print('friday: 4')
-            print('saturday: 5')
-            print('sunday: 6')
-            print('all: 7')
+            print_days()
             day = int(input())
 
         day = get_key(day, days)
@@ -200,14 +193,10 @@ def station_stats(df):
 
     try:
         # Display most commonly used start station
-        common_start_station = df['Start Station'].mode()[0]
-        common_start_station_counts = df['Start Station'].value_counts()[0]
-        print('The most common start station is: ', common_start_station, 'and it was used ', common_start_station_counts, ' times.')
+        most_common_station('Start Station')
 
         # Display most commonly used end station
-        common_end_station = df['End Station'].mode()[0]
-        common_end_station_counts = df['End Station'].value_counts()[0]
-        print('The most common end station is: ', common_end_station, 'and it was used ', common_end_station_counts, ' times.')
+        most_common_station('End Station')
 
         # Display most frequent combination of start station and end station trip
         frequent_trip = df.loc[:, 'Start Station':'End Station'].mode()[0:]
@@ -221,6 +210,17 @@ def station_stats(df):
         print("\nThis took %s seconds." % (time.time() - start_time))
         print('-'*40)
 
+def most_common_station(direction):
+    """
+        Displays the most common station
+
+        Args:
+            (str) direction: wether it is a start or end station
+
+    """
+    common_station = df[direction].mode()[0]
+    common_station_counts = df[direction].value_counts()[0]
+    print('The most common ', direction , ' is: ',common_station, 'and it was used ', common_station_counts, ' times.')
 
 def trip_duration_stats(df):
     """
@@ -276,10 +276,7 @@ def user_stats(df):
         print('The counts of gender are: ', gender)
 
         # Display earliest, most recent, and most common year of birth
-        earliest_year = df['Birth Year'].min()
-        most_recent_year = df['Birth Year'].max()
-        most_common_year = df['Birth Year'].mode()
-        print('The oldest customer was born in: ', int(earliest_year),'\n' 'the youngest one was born in:', int(most_recent_year),'\n' 'most of our customers are born in:', int(most_common_year))
+        info_year()
 
     except Exception as e:
         print("Exception occurred: {}".format(e))
@@ -287,6 +284,17 @@ def user_stats(df):
     finally:
         print("\nThis took %s seconds." % (time.time() - start_time))
         print('-'*40)
+
+# Display earliest, most recent, and most common year of birth
+def info_year():
+    """
+    Displays the earliest, most recent, and most common year of birth
+    """
+    earliest_year = df['Birth Year'].min()
+    most_recent_year = df['Birth Year'].max()
+    most_common_year = df['Birth Year'].mode()
+    print('The oldest customer was born in: ', int(earliest_year),'\n' 'the youngest one was born in:', int(most_recent_year),'\n' 'most of our customers are born in:', int(most_common_year))
+
 
 #Function to display data to the user on request
 def display_data(df):
