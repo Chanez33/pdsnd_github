@@ -263,10 +263,7 @@ def user_stats(df):
         print('The counts of gender are: ', gender)
 
         # Display earliest, most recent, and most common year of birth
-        earliest_year = df['Birth Year'].min()
-        most_recent_year = df['Birth Year'].max()
-        most_common_year = df['Birth Year'].mode()
-        print('The oldest customer was born in: ', int(earliest_year),'\n' 'the youngest one was born in:', int(most_recent_year),'\n' 'most of our customers are born in:', int(most_common_year))
+        info_year()
 
     except Exception as e:
         print("Exception occurred: {}".format(e))
@@ -274,6 +271,17 @@ def user_stats(df):
     finally:
         print("\nThis took %s seconds." % (time.time() - start_time))
         print('-'*40)
+
+# Display earliest, most recent, and most common year of birth
+def info_year():
+    """
+    Displays the earliest, most recent, and most common year of birth
+    """
+    earliest_year = df['Birth Year'].min()
+    most_recent_year = df['Birth Year'].max()
+    most_common_year = df['Birth Year'].mode()
+    print('The oldest customer was born in: ', int(earliest_year),'\n' 'the youngest one was born in:', int(most_recent_year),'\n' 'most of our customers are born in:', int(most_common_year))
+
 
 #Function to display data to the user on request
 def display_data(df):
