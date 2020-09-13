@@ -41,7 +41,6 @@ def get_filters():
     try :
         city = int(input())
 
-
         while city not in cities.values():
             print("Invalid input!! \n")
             print("please enter the number corresponding to the city that you would like to analyze the data for : ")
@@ -187,14 +186,10 @@ def station_stats(df):
 
     try:
         # Display most commonly used start station
-        common_start_station = df['Start Station'].mode()[0]
-        common_start_station_counts = df['Start Station'].value_counts()[0]
-        print('The most common start station is: ', common_start_station, 'and it was used ', common_start_station_counts, ' times.')
+        most_common_station('Start Station')
 
         # Display most commonly used end station
-        common_end_station = df['End Station'].mode()[0]
-        common_end_station_counts = df['End Station'].value_counts()[0]
-        print('The most common end station is: ', common_end_station, 'and it was used ', common_end_station_counts, ' times.')
+        most_common_station('End Station')
 
         # Display most frequent combination of start station and end station trip
         frequent_trip = df.loc[:, 'Start Station':'End Station'].mode()[0:]
@@ -208,6 +203,17 @@ def station_stats(df):
         print("\nThis took %s seconds." % (time.time() - start_time))
         print('-'*40)
 
+def most_common_station(direction):
+    """
+        Displays the most common station
+
+        Args:
+            (str) direction: wether it is a start or end station
+
+    """
+    common_station = df[direction].mode()[0]
+    common_station_counts = df[direction].value_counts()[0]
+    print('The most common ', direction , ' is: ',common_station, 'and it was used ', common_station_counts, ' times.')
 
 def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
